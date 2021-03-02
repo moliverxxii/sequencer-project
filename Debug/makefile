@@ -28,34 +28,34 @@ endif
 
 -include ../makefile.defs
 
-BUILD_ARTIFACT_NAME := sequencer-project-2
+BUILD_ARTIFACT_NAME := sequencer-project
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX := 
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME).$(BUILD_ARTIFACT_EXTENSION)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-sequencer-project-2.elf \
+sequencer-project.elf \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-sequencer-project-2.list \
+sequencer-project.list \
 
 OBJCOPY_BIN += \
-sequencer-project-2.bin \
+sequencer-project.bin \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: sequencer-project-2.elf secondary-outputs
+main-build: sequencer-project.elf secondary-outputs
 
 # Tool invocations
-sequencer-project-2.elf: $(OBJS) $(USER_OBJS) C:\Users\Baba\STM32CubeIDE\workspace_1.5.1\sequencer-project-2\STM32L432KCUX_FLASH.ld
-	arm-none-eabi-gcc -o "sequencer-project-2.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Baba\STM32CubeIDE\workspace_1.5.1\sequencer-project-2\STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sequencer-project-2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+sequencer-project.elf: $(OBJS) $(USER_OBJS) /Users/moliver/Documents/ENSEA/2A-V2/Projet/stm32cubeide/sequencer-project/STM32L432KCUX_FLASH.ld
+	arm-none-eabi-gcc -o "sequencer-project.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/Users/moliver/Documents/ENSEA/2A-V2/Projet/stm32cubeide/sequencer-project/STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sequencer-project.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -64,13 +64,13 @@ default.size.stdout: $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-sequencer-project-2.list: $(EXECUTABLES)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "sequencer-project-2.list"
+sequencer-project.list: $(EXECUTABLES)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "sequencer-project.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-sequencer-project-2.bin: $(EXECUTABLES)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "sequencer-project-2.bin"
+sequencer-project.bin: $(EXECUTABLES)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "sequencer-project.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 

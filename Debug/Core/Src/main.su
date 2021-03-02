@@ -1,9 +1,7 @@
-main.c:89:5:__io_putchar	16	static
-main.c:100:5:main	16	static
-main.c:162:6:LED_Matrix_Init	24	static
-main.c:191:6:SystemClock_Config	184	static
-main.c:248:13:MX_I2C1_Init	8	static
-main.c:294:13:MX_USART2_UART_Init	8	static
-main.c:329:13:MX_GPIO_Init	40	static
-main.c:367:6:Display	80	static
-main.c:581:6:Error_Handler	8	static
+main.c:67:5:__io_putchar	16	static
+main.c:78:5:main	16	static
+main.c:147:6:SystemClock_Config	184	static
+main.c:204:13:MX_I2C1_Init	8	static
+main.c:250:13:MX_USART2_UART_Init	8	static
+main.c:285:13:MX_GPIO_Init	40	static
+main.c:329:6:Error_Handler	8	static
