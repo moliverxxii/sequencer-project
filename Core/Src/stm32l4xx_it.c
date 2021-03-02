@@ -208,7 +208,7 @@ void EXTI1_IRQHandler(void)
   /* USER CODE END EXTI1_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
   /* USER CODE BEGIN EXTI1_IRQn 1 */
-  if( ((WHEELB_GPIO_Port->IDR)>>14)>0.5 )
+  if( ((WHEELB_GPIO_Port->IDR)>>14)>0.8 )
   {
 	  printf("droite\r\n");
   }
