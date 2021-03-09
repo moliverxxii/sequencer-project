@@ -16,7 +16,11 @@ static uint8_t blackBoard[I2C_BUFSIZE];
 uint8_t tune[I2C_BUFSIZE];
 uint8_t way[I2C_BUFSIZE];
 
-char scale[] = "mm";
+void Display(float, int, int, int);
+void LED_Matrix_Init(void);
+void tabnot(char,uint8_t*);
+
+extern char scale[];
 static char ga1[] = "ma";
 static char ga2[] = "mm";
 static char ga3[] = "mh";
@@ -46,6 +50,7 @@ void LED_Matrix_Init()
 	I2CMasterBuffer[0] = 0xEA;		// Dimming duty a donf!
 	HAL_I2C_Master_Transmit (&hi2c1, HT16K33_I2C_ADDRESS, I2CMasterBuffer, 1, HAL_MAX_DELAY);
 	HAL_Delay(1);
+
 	for (int i = 0 ; i < 17 ; i++)
 	{
 		I2CMasterBuffer[i] = 0;
@@ -53,6 +58,68 @@ void LED_Matrix_Init()
 	for (int i = 0 ; i < 17 ; i++)
 	{
 		blackBoard[i] = 0;
+	}
+
+
+}
+
+void tabnot(char scale,uint8_t *tab)
+{
+	while (1){
+			if (strcmp(&scale,ga1)==0){ //majeur
+				for (int j = 1; j < 17; j+=2)
+				{
+					if ((tab[j/2+1]==3)|(tab[j/2+1]==7)){
+						I2CMasterBuffer[j] = 1<<(tab[j/2+1]-1);
+					}
+					else{
+						I2CMasterBuffer[j+1] = 1<<(tab[j/2+1]-1);
+					}
+				}
+				HAL_I2C_Master_Transmit (&hi2c1, HT16K33_I2C_ADDRESS, I2CMasterBuffer, 17, HAL_MAX_DELAY);
+				//printf("\r\n===Fck===\r\n");
+			}
+			else if (strcmp(&scale,ga2)==0){ //mineur mélodique
+				for (int j = 1; j < 17; j+=2) {
+					if ((tab[j/2+1]==2)|(tab[j/2+1]==7)){
+						I2CMasterBuffer[j] = 1<<(tab[j/2+1]-1);
+					}
+					else{
+						I2CMasterBuffer[j+1] = 1<<(tab[j/2+1]-1);
+					}
+				}
+				HAL_I2C_Master_Transmit (&hi2c1, HT16K33_I2C_ADDRESS, I2CMasterBuffer, 17, HAL_MAX_DELAY);
+			}
+			else if (strcmp(&scale,ga3)==0){ //mineur harmonique
+				for (int j = 1; j < 17; j+=2) {
+					if ((tab[j/2+1]==2)|(tab[j/2+1]==5)|(tab[j/2+1]==7)){
+						I2CMasterBuffer[j] = 1<<(tab[j/2+1]-1);
+					}
+					else if(tab[j/2+1]==6){
+						I2CMasterBuffer[j] = 1<<(tab[j/2+1]-1);
+						I2CMasterBuffer[j+1] = 1<<(tab[j/2+1]-1);
+					}
+					else{
+						I2CMasterBuffer[j+1] = 1<<(tab[j/2+1]-1);
+					}
+				}
+				HAL_I2C_Master_Transmit (&hi2c1, HT16K33_I2C_ADDRESS, I2CMasterBuffer, 17, HAL_MAX_DELAY);
+			}
+			else if (strcmp(&scale,ga4)==0){ //blues
+				for (int j = 1; j < 17; j+=2) {
+					if ((tab[j/2+1]==2)|(tab[j/2+1]==6)|(tab[j/2+1]==8)){
+						I2CMasterBuffer[j] = 1<<(tab[j/2+1]-1);
+					}
+					else if((tab[j/2+1]==1)|(tab[j/2+1]==5)|(tab[j/2+1]==7)){
+						I2CMasterBuffer[j] = 1<<(tab[j/2+1]-1);
+						I2CMasterBuffer[j+1] = 1<<(tab[j/2+1]-1);
+					}
+					else{
+						I2CMasterBuffer[j+1] = 1<<(tab[j/2+1]-1);
+					}
+				}
+				HAL_I2C_Master_Transmit (&hi2c1, HT16K33_I2C_ADDRESS, I2CMasterBuffer, 17, HAL_MAX_DELAY);
+			}
 	}
 }
 

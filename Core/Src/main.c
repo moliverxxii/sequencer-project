@@ -46,6 +46,7 @@ UART_HandleTypeDef huart2;
 /* USER CODE BEGIN PV */
 UART_HandleTypeDef huart2;
 uint8_t table[64];
+char scale[] = "mm";
 
 /* USER CODE END PV */
 
@@ -115,14 +116,15 @@ int main(void)
 	  table[8]=6;
 	  printf("\r\n Bonjour !!\r\n");
 
-
+	  LED_Matrix_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
+	  tabnot(scale,table);
+	  /*
 	  for (int j = 1; j < 9; j++) {
 		  //printf("\r\n=== %d ===\r\n",j);
 		if (table[j]<8) {
@@ -132,6 +134,7 @@ int main(void)
 			table[j]=1;
 		}
 	  }
+	  */
 	  //Display(0,0,0,0);
   }
 }

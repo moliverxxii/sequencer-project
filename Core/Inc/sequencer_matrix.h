@@ -11,8 +11,6 @@
 #define HT16K33_I2C_ADDRESS (0xE0)
 #define I2C_BUFSIZE 40
 
-void Display(float, int, int, int);
-void LED_Matrix_Init(void);
 
 
 #endif /* INC_SEQUENCER_MATRIX_H_ */
